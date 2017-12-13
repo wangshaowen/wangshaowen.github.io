@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>changeColor</title>
+		<style type="text/css">
+		#one{
+			width:100px;
+			height:100px;
+			border:1px solid black;
+			
+		}
+		#two{
+			border:1px solid black;
+			width:102px;
+			padding:50px;
+		
+			
+		
+		}
+		#three{
+			border:1px solid black;
+			width:204px;
+			padding:50px;
+		}
+		#four{
+			border:1px solid black;
+			width:306px;
+			padding:50px;
+			margin:20px auto;
+		}
+		#btn{
+			margin-left:40%;
+		}
+		.ff1{
+			margin-left:20%;
+		}
+		
+		</style>
+		
+		
+	</head>
+
+	<body>
+	<form method="post">
+		<div id="btn">
+			<input  type="button"  value="前进" >
+			<input  class="ff1" type="button" value="后退">
+		</div>
+	</form>
+	<div id="four">
+		<div id="three">
+			<div id="two">
+				<div id="one">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+		<script type="text/javascript">
+		
+			var click=0;
+			var divNum=0;
+			var corNum=0;
+			var divs=new Array("one","two","three","four");
+			var colors=new Array("red","yellow","green","blue");
+			var btnBox = document.getElementById("btn");
+			var btns = btnBox.getElementsByTagName("input");
+			btns[0].onclick = function(){
+				click++;
+				if(click <= 4)
+				{
+				for(var i = 0; i < click;i++){
+					var d = document.getElementById(divs[i]);
+					d.style.backgroundColor = colors[click - i - 1];
+					console.log(click - i - 1);
+					}
+				}else{
+				var n = click % 4;
+				for(var i = 1;i <= 4;i++)
+				{
+					var d = document.getElementById(divs[4-i]);
+					var x = (i + n -1)%4;
+					d.style.backgroundColor = colors[x];
+				
+					}
+				}
+		
+		}
+		
+		btns[1].onclick = function(){
+			click++;
+			var n = click % 4;
+			for(var i = 1;i <= 4;i++)
+			{
+				var d = document.getElementById(divs[i-1]);
+				var x = (i+n-1)%4;
+				d.style.backgroundColor = colors[x];
+			
+			
+			}
+		
+		}
+		
+		
+		
+		
+		</script>
+	</body>
+	</html>
