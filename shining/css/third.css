@@ -1,0 +1,112 @@
+	#bd_b {
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+	}
+	
+	#bg_img {
+		width: 100%;
+		position: relative;
+		text-align: center;
+	}
+	
+	#bg_img #bg_img_t {
+		width: 100%;
+	}
+	
+	#bg_img #bg_img_t img {
+		width: 100%;
+	}
+	
+	#bg_img_msk {
+		position: absolute;
+		width: 100%;
+		left: 0;
+		bottom: 10px;
+	}
+	
+	#bg_img_msk .sp {
+		width: 8px;
+		height: 8px;
+		background: #8291A0;
+		border-radius: 100%;
+		display: inline-block;
+		margin: 0 5px;
+		cursor: pointer;
+	}
+	
+	#bd_falls {
+		width: 100%;
+		margin-top: 17px;
+		overflow: hidden;
+	}
+	
+	#bd_falls_f {
+		width: 98%;
+		margin: 0 auto;
+		position: relative;
+		overflow: hidden;
+	}
+	
+	#bd_falls ul {
+		position: relative;
+		width: 24.4%;
+		float: left;
+		margin: 0.3%;
+	}
+	
+	#bd_falls ul li {
+		position: relative;
+		width: 100%;
+		margin: 5px 0;
+		overflow: hidden;
+	}
+	
+	#bd_falls ul li img {
+		width: 100%;
+	}
+	
+	.mask {
+		position: absolute;
+		width: 100%;
+		background: black;
+		opacity: 0.5;
+		text-align: center;
+		height: 100%;
+		top: 0;
+		display: none;
+	}
+	
+	#bd_falls ul li .mask img {
+		position: absolute;
+		width: 9%;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+	}
+	
+	#bg_img_msk .changeColor {
+		background-color: #cfdb00;
+	}
+	
+	#mask_b{
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color:rgba(0,0,0,0.5);
+		display: none;
+		
+	}
+	#mask_b img{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 70%;
+		height: 70%;
+	}

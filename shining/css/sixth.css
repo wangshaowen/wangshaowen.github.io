@@ -1,0 +1,100 @@
+			body {
+				background-color: #f5f5f5;
+			}
+			
+			#bd {
+				background: url(img/contact_point_bg.png) 50% 69px no-repeat rgb(245, 245, 245);
+				text-align: center;
+				position: relative;
+			}
+			
+			#bd_b {
+				padding-top: 7em;
+				padding-bottom: 17em;
+			}
+			
+			#bd_f {
+				margin-bottom: 30px;
+			}
+			
+			#bd_b span {
+				font-size: 1.4em;
+				vertical-align: middle;
+				font-weight: bold;
+			}
+			
+			#bd_b #bd_f em {
+				font-weight: bold;
+				font-style: normal;
+				vertical-align: middle;
+				font-size: 1.1em;
+				color: rgb(89, 87, 87);
+			}
+			
+			#bd_s {
+				margin-bottom: 5em;
+			}
+			
+			#bd_s em {
+				font-style: normal;
+				vertical-align: middle;
+				font-size: 1.1em;
+				color: rgb(89, 87, 87);
+			}
+			
+			#bd_s img {
+				margin-right: 7px;
+				width: 32px;
+			}
+			
+			#bd_t {
+				width: 75%;
+				margin: 0 auto;
+				overflow: hidden;
+				font-size: 0.8em;
+				padding-left: 23%;
+				min-width: 712px;
+			}
+			
+			#bd_four {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+			}
+			
+			#bd_four img {
+				width: 100%;
+			}
+			
+			#bd_t .float {
+				float: left;
+				text-align: left;
+			}
+			
+			#bd_t .float div {
+				margin-right: 7px;
+				float: left
+			}
+			
+			#bd_t #bd_t_1 {
+				width: 25%;
+				min-width: 172px;
+			}
+			
+			#bd_t #bd_t_2 {
+				width: 20%;
+				min-width: 141px;
+			}
+			
+			#bd_t #bd_t_3 {
+				width: 50%;
+				min-width: 323px;
+			}
+			
+			#bd_t p {
+				color: rgb(89, 87, 87);
+			}
+			
+			#phonenum {
+				margin: 0 0 11px 3px;
+			}

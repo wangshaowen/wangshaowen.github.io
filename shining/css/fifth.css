@@ -1,0 +1,184 @@
+			#head {
+				position: fixed;
+				top: 0;
+				z-index: 999;
+			}
+			
+			#bd {
+				background-color:#e5e5e5;
+				min-width: 550px;
+			}
+			
+			.bd_b {
+				height: 655px;
+				max-height: 655px;
+				width: 100%;
+				overflow: hidden;
+				position: relative;
+			}
+			.bd_b_last{
+				max-height: 580px;
+			}
+			/*
+			 *第一个
+			 */
+			
+			.bd_b_b {
+				position: relative;
+				max-width: 980px;
+				width: 75%;
+				height: 100%;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			
+			.bd_b_b .bd_b_l {
+				width: 50%;
+				position: relative;
+				top: 173px;
+				z-index: 99;
+			}
+			
+			.bd_b_b .bd_b_l h2 {
+				color: #616161;
+				display: inline-block;
+				padding: 0px 5px;
+				border: 1px solid #616161;
+				line-height: 105%;
+				font-size: 1.4em;
+				border-radius: 6px;
+				margin-right: 5px;
+			}
+			
+			.bd_b_b .bd_b_l h3 {
+				color: #616161;
+				display: inline-block;
+				line-height: 150%;
+				font-size: 1.4em;
+			}
+			
+			.bd_b_b .bd_b_l span {
+				display: block;
+				width: 80%;
+				line-height: 1.4em;
+				/* margin: 4% 0; */
+				margin: 15px 0;
+				z-index: 100;
+				word-break: break-word;
+			}
+			
+			.bd_b_b .bd_b_l #bd_b_l_img {
+				width: 80%;
+				overflow: hidden;
+			}
+			
+			.bd_b_b .bd_b_l img {
+				float: left;
+				width: 33%;
+			}
+			
+			.bd_b_b .bd_b_r {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				width: 22em;
+			}
+			
+			.bd_b_b .bd_b_r img {
+				width: 100%;
+			}
+			/*
+			 *第二个
+			 * 
+			 */
+			
+			.bd_b2 {
+				background-color: white;
+			}
+			
+			#bd_b_l_img2 img {
+				width: 47%;
+				margin-right: 6px;
+			}
+			
+			#bd_b_l_img2 {
+				width: 80%;
+				overflow: hidden;
+			}
+			
+			.bd_b_b .bd_b_r2 {
+				position: absolute;
+				right: 46px;
+				top: 0;
+			}
+			/*
+			 *第三个
+			 * 
+			 */
+			
+			.bd_b_l3 {
+				position: relative;
+				top: 190px;
+				left: 40%;
+			}
+			
+			.bd_b_b .bd_b_r3 {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 400px;
+			}
+			
+			#bd_b_l_img3 {
+				width: 100%;
+				overflow: hidden;
+			}
+			
+			#bd_b_l_img3 img {
+				width: 48%;
+				margin-right: 1%;
+			}
+			
+			#sp {
+				width: 55%;
+			}
+			/*
+			 * 第四个
+			 */
+			
+			#f_img {
+				position: absolute;
+				width: 400px;
+				left: 51px;
+				top: 0;
+			}
+			
+			.bd_b_l4 {
+				left: 180px;
+			}
+			
+			#bd_b_l_img4 {
+				width: 70%;
+			}
+			
+			#bd_b_l_img4 img {
+				width: 60%;
+			}
+			/*
+			 * 第五个
+			 */
+			
+			.bd_b_r5 {
+				position: absolute;
+				right: 50px;
+				top: 0;
+				width: 22em;
+			}
+			
+			.bd_b_r5 img {
+				width: 100%;
+			}
+			
+			#bd_b_l5 {
+				top: 300px;
+			}

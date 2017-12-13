@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<title></title>
+		<style type="text/css">
+			html {
+				font-size: 20px;
+				background-color: #ebeae4;
+			}
+			
+			#box {
+				overflow: hidden;
+			}
+			
+			header {
+				height: 4.2rem;
+				background: #48382b;
+				color: white;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				padding: 0 1rem;
+				z-index: 1;
+			}
+			
+			#city {
+				font-size: 1.7rem;
+				font-family: "宋体";
+				padding-right: 1.5rem;
+				background: url(img/jiantou.png) no-repeat right center/1.3rem .6rem;
+			}
+			
+			#search {
+				width: 20rem;
+				height: 2.5rem;
+				/*前面的背景会遮挡后面的背景*/
+				background: url(img/sou.png) no-repeat 1rem center/1.7rem 1.7rem, url(img/sou_bg.png) no-repeat center/100% 100%;
+				line-height: 2.5rem;
+				position: relative;
+			}
+			
+			#search input {
+				position: absolute;
+				left: 3rem;
+				top: 0;
+				bottom: 0;
+				/*margin: auto;*/
+				width: 80%;
+				background: transparent;
+				font-size: 1.1rem;
+				color: #c3ad88;
+				outline: none;
+			}
+			
+			#search input::-webkit-input-placeholder {
+				color: #C3AD88;
+			}
+			
+			#bell {
+				width: 1.65rem;
+				height: 2.2rem;
+				background: url(img/bell.png) no-repeat 0 0/100%;
+			}
+			
+			section {
+				position: relative;
+				background-color: #ebeae4;
+			}
+			
+			#banner {
+				/*background: url(img/banner.png) no-repeat 0 0/100% 17.5rem;*/
+				height: 17.5rem;
+				position: relative;
+				/*overflow: hidden;*/
+				top: 4.2rem;
+				text-align: center;
+			}
+			
+			#banner .wenzi {
+				position: relative;
+				height: 100%;
+				color: white;
+			}
+			#banner .wenzi .wenzi_l{
+				width: 100%;
+				position: absolute;
+				top: 6rem;
+				
+			}
+			#banner .wenzi img{
+				width: 100%;
+				height: 100%;
+			}
+			#banner .zhezhao {
+				height: 2.5rem;
+				width: 100%;
+				background: black;
+				opacity: 0.1;
+				position: absolute;
+				bottom: 0;
+			}
+			
+			#banner h2 {
+				font-size: 2rem;
+			}
+			
+			#banner p {
+				display: inline-block;
+				font-size: 1rem;
+				border: 1px solid white;
+				margin-top: 1rem;
+				padding: 0 0.5rem;
+				border-radius: 0.5rem;
+			}
+			
+			#buy_limit {
+				position: relative;
+				top: 5.2rem;
+				background: white;
+				padding: 1.5rem 1.5rem 0.9rem;
+				overflow: hidden;
+			}
+			
+			#buy_limit img {
+				width: 100%;
+			}
+			
+			#buy_limit #b_left {
+				float: left;
+				width: 48.5%;
+			}
+			
+			#buy_limit #b_right {
+				float: right;
+				width: 48.5%;
+			}
+			
+			.tille {
+				font-size: 1.3rem;
+				height: 2rem;
+				line-height: 2rem;
+				color: #6ab439;
+			}
+			
+			.p1 {
+				height: 2rem;
+				color: #b8b8b8;
+				font-size: 1.1rem;
+				line-height: 2rem;
+			}
+			
+			#buy_limit #time {
+				height: 2.2rem;
+				/*width: 2rem;*/
+				line-height: 2.2rem;
+				overflow: hidden;
+				margin-bottom: 0.5rem;
+				font-size: 1.3rem;
+				margin-top: 0.5rem;
+			}
+			
+			#buy_limit #time div {
+				display: inline-block;
+			}
+			
+			#buy_limit #time .h,
+			.m,
+			.s {
+				width: 2rem;
+				height: 2.2rem;
+				background: url(img/time.png) no-repeat 0 0/100% 100%;
+				/*line-height: 2.2rem;*/
+				text-align: center;
+				color: white;
+			}
+			
+			#buy_limit #time .time_right {
+				float: right;
+				color: red;
+				font-size: 1.6rem;
+			}
+			
+			#recommend {
+				position: relative;
+				background: white;
+				top: 6.2rem;
+				padding-bottom: 5.2rem;
+			}
+			
+			#recommend #re_title {
+				position: relative;
+				height: 3.6rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0 1.5rem;
+			}
+			
+			#recommend #re_title a {
+				color: #b8b8b8;
+				font-size: 1.2rem;
+			}
+			
+			#recommend #re_body {
+				border-top: 1px solid #ebeae4;
+			}
+			
+			#recommend #re_body ul {
+				height: 15rem;
+				/*display: inline-block;*/
+				overflow: hidden;
+				position: relative;
+			}
+			#recommend #re_body ul li{
+				position: relative;
+			}
+			#recommend #re_body ul li a {
+				color: white;
+			}
+			#recommend #re_body ul li img{
+				width: 100%;
+				height: 100%;
+			}
+			#recommend .re_bordy_pic1 {
+				/*background: url(img/101.png) no-repeat 0 0/100% 100%;*/
+				font-size: 1.3rem;
+				float: left;
+				width: 38.6%;
+				height: 100%;
+			}
+			
+			#recommend .re_bordy_pic2 {
+				/*background: url(img/102.png) no-repeat 0 0/100% 100%;*/
+				font-size: 1.2rem;
+				float: right;
+				width: 61.4%;
+				height: 50%;
+			}
+			
+			#recommend .re_bordy_pic3,#recommend .re_bordy_pic4{
+				/*background: url(img/103.png) no-repeat 0 0/100% 100%;*/
+				font-size: 1.1rem;
+				float: left;
+				width: 30.7%;
+				height: 50%;
+			}	
+			#recommend #re_body .re_body_mo1 {
+				position: absolute;
+				top: 1rem;
+				left: 1.5rem;
+/*				background: rgba(0, 0, 0, 0.05);*/
+			}
+			
+			#shopcar {
+				position: fixed;
+				height: 5rem;
+				width: 5rem;
+				display: inline-block;
+				text-align: center;
+				line-height: 5rem;
+				background: rgba(0, 0, 0, 0.5);
+				border-radius: 2.5rem;
+				bottom: 12.7rem;
+				right: 0.3rem;
+				z-index: 100;
+			}
+			
+			#shopcar img {
+				width: 2.5rem;
+				height: 2.5rem;
+			}
+			
+			footer {
+				position: fixed;
+				background: #48382b;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				display: flex;
+				justify-content: space-around;
+				/*height: 5rem;*/
+				padding-top: 0.8rem;
+				padding-bottom: 0.5rem;
+				align-items: center;
+				color: #c3ad88;
+				text-align: center;
+				font-size: 1rem;
+			}
+			
+			footer img {
+				width: 1.8rem;
+			}
+			footer .f_h{
+				width: 1.8rem;
+				height: 1.8rem;
+				margin-bottom: .3rem;
+			}
+			
+			@media only screen and (max-width:450px) {
+				html {
+					font-size: 12px;
+				}
+			}
+			
+			@media only screen and (max-width: 380px) {
+				html {
+					font-size: 10px;
+				}
+			}
+			
+			@media only screen and (max-width:320px) {
+				#search {
+					width: 15rem;
+					height: 2.5rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div di="box">
+			<header>
+				<div id="city">北京</div>
+				<div id="search">
+					<input type="search" name="" required="" placeholder="搜索食材丶菜品" x-webkit-speech="" x-webkit-grammar="builtin:search" lang="zh-CN">
+				</div>
+				<div id="bell">
+
+				</div>
+			</header>
+			<section>
+				<div id=banner>
+					<a href="###">
+						<div class="wenzi">
+							<div class="wenzi_l"><h2>吃三文鱼的正确姿势</h2>
+							<p>早餐来点啥？？</p>
+							</div>
+							<img src="img/banner.png" alt="" />
+							<div class="zhezhao"></div>
+						</div>
+					</a>
+				</div>
+				<div id=buy_limit>
+					<p class="tille">兔抢购</p>
+					<div id="b_left">
+						<p class="p1">精选延庆生态胡萝卜600g</p>
+						<div id="time">
+							<div class="time_left baseline">
+								<div class="h">01</div><span>&nbsp;:</span>
+								<div class="m">36</div><span>&nbsp;:</span>
+								<div class="s">56</div>
+							</div>
+							<div class="time_right">
+								¥4.20
+							</div>
+						</div>
+						<div>
+							<a href="###">
+								<div></div>
+								<img src="img/lp.png" alt="" />
+							</a>
+						</div>
+					</div>
+					<div id="b_right">
+						<p class="p1">精选延庆生态黄瓜500g</p>
+						<div id="time">
+							<div class="time_left">
+								<div class="h">01</div><span>&nbsp;:</span>
+								<div class="m">45</div><span>&nbsp;:</span>
+								<div class="s">20</div>
+							</div>
+							<div class="time_right">
+								¥9.90
+							</div>
+						</div>
+						<div>
+							<a href="###">
+								<div></div>
+								<img src="img/rp.png" alt="" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="recommend">
+					<div id="re_title">
+						<p class="tille">菜品精选</p>
+						<a href="###">查看更多</a>
+					</div>
+					<div id="re_body">
+						<ul>
+							<li class="re_bordy_pic1">
+								<a href="###">
+									<div class="re_body_mo1">
+										<p>麻辣牛排</p>
+										<p>¥35</p>
+									</div>
+									<img src="img/101.png" alt="" />
+								</a>
+							</li>
+							<li class="re_bordy_pic2">
+								<a href="###">
+									<div class="re_body_mo1">
+										<p>香墩樱桃派</p>
+										<p>¥23</p>
+									</div>
+									<img src="img/102.png" alt="" />
+								</a>
+							</li>
+							<li class="re_bordy_pic3">
+								<a href="###">
+									<div class="re_body_mo1">
+										<p>白菜牛肉面</p>
+										<p>¥30</p>
+									</div>
+									<img src="img/103.png" alt="" />
+								</a>
+							</li>
+							<li class="re_bordy_pic4">
+								<a href="###">
+									<div class="re_body_mo1">
+										<p>牛肉芝士丸</p>
+										<p>¥23</p>
+									</div>
+									<img src="img/104.png" alt="" />
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<footer>
+				<div id=shopcar>
+					<img src="img/shopcar.png" alt="" />
+				</div>
+				<div>
+					<div class="f_h">
+					<img src="img/home.png" alt="" />
+					</div>
+					<p>主页</p>
+				</div>
+				<div>
+					<div class="f_h">
+					<img src="img/shop.png" alt="" />
+					</div>
+					<p>商城</p>
+				</div>
+				<div>
+					<div class="f_h">
+					<img src="img/select.png" alt="" />
+					</div>
+					<p>选菜</p>
+				</div>
+				<div>
+					<div class="f_h">
+					<img src="img/find.png" alt="" />
+					</div>
+					<p>发现</p>
+				</div>
+				<div>
+					<div class="f_h">
+					<img src="img/my.png" alt="" />
+					</div>
+					<p>我的</p>
+				</div>
+			</footer>
+		</div>
+	</body>
+
+</html>

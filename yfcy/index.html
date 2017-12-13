@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="base.css">
+    <style type="text/css">
+    html{
+    	height: 100%;
+    }
+    body {
+        font-size: 100%;
+        background-color: #f2f2f2;
+        font-family: 微软雅黑;
+    }    
+ 	 div{
+        display: block;
+    }
+    .li:hover .mask{
+            display: block;
+        }
+    
+    #head {
+        position: fixed;
+        width: 100%;
+        z-index: 200;
+        background-color: rgba(0, 0, 0, 0.75);
+        padding: 15px 0 0px;
+        text-align: center;
+        font-size: 82%;
+    }
+    
+    #head .logo {
+        width: 136px;
+        height: 44px;
+    }
+    
+    #head .bar {
+        margin: 18px auto 6px;
+        width: 80%;
+        font-family: HUM521L;
+        min-width: 320px;
+    }
+    
+    #head .bar a {
+        margin-left: 11%;
+        color: #8e8e8e;
+    }
+    
+    #head .bar .a1 {
+        margin: 0;
+    }
+    
+    #body {
+        position: relative;
+        width: 100%;
+        min-width: 320px;
+        overflow: hidden;
+    }
+    
+    #body .background {
+        position: relative;
+        margin: 130px auto 0;
+        width: 75%;
+        max-width: 1200px;
+        min-width: 130px;
+        overflow: hidden;
+    }
+    
+    .b_top {
+        position: relative;
+        width: 100%;
+    }
+    .b_top .b_pic_top{
+        position: relative;
+        width: 100%;
+    }
+    .b_top .b_pic {
+        width: 100%;
+        height: 668px;
+    }
+    
+    .b_left img {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+    }
+    
+    .b_right img {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+    }
+    
+    .b_bottom {
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 35px;
+        position: absolute;
+        top: 633px;
+    }
+    
+    .b_bottom p {
+        text-align: center;
+        line-height: 35px;
+        color: #f2f2f2;
+    }
+    
+    .span {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border: 1px solid white;
+        border-radius: 6px;
+        margin: 0 8px;
+        background-color: #999;
+    }
+    
+    .b_span {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .b_span .span1 {
+        background-color: #f2f2f2;
+        border-color: #999;
+    }
+    
+    .swiper_p {
+        margin-top: 30px;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        border-top: 1px #e8e8e8 solid;
+        border-bottom: 1px #e8e8e8 solid;
+        font-family: STKaiti, "微软雅黑";
+        color: #666666;
+        line-height: 1.5em;
+        font-size: 0.9rem;
+        text-indent: 2em;
+    }
+    
+    .logo2 {
+        width: 100%;
+        margin: 2% auto;
+        overflow: hidden;
+        text-align: center;
+    }
+    
+    .logo2 span img {
+        width: 5%;
+        margin: 0 10px;
+        min-width: 38px;
+    }
+    
+    .b_middle ul {
+        width: 100%;
+        text-align: center;
+        overflow:hidden;
+    }
+    
+    .b_middle ul li {
+        float: left;
+        width: 31%;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 2px 2px 2px #e3e3e3;
+        position:relative;
+
+    }
+    
+    .b_middle ul a {
+        width: 100%;
+    }
+    
+    .b_middle ul p {
+        width: 100%;
+        color: #666666;
+        text-align: center;
+        line-height: 35px;
+        font-size: 0.98em;
+        overflow: hidden;
+         /*超出用省略号代替*/
+        text-overflow:ellipsis;
+        /*文本换行，nowrap:不去换行，一行显示*/
+        white-space: nowrap;
+    }
+    
+    .b_middle ul li img {
+        width: 100%;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        vertical-align: middle;
+    }
+    
+    .li {
+        margin: 2% 0;
+        position:relative;
+    }
+    
+/*    .b_middle ul .li_m {
+        margin: 2% 3.5%;
+    }*/
+
+
+
+    /*修改*/
+    .b_middle ul li:nth-child(3n+2){
+        margin:2% 3.5%;
+    }
+    @media  screen and (max-width: 800px) {
+        html,body{
+            font-size: 86%;
+        }
+
+        .b_middle ul li{
+            margin:0;
+            padding: 0;
+        }
+        .b_middle ul li p{
+            line-height: 25px;
+        }
+        .b_middle ul li:nth-child(3n+2){
+            margin:0;
+        }
+        .b_middle ul li{
+            width: 45%;
+            margin:2% 0;
+        }
+        .b_middle ul li:nth-child(2n+2){
+            margin:2% 0 2% 10%;
+        }
+        .center h2{
+            font-size: 1.0rem;
+        }
+        
+    }
+
+
+
+
+
+
+
+    .b_middle .li .back{
+        display: inline-block;
+        width:100%;
+        height: 300px;
+        vertical-align: middle;
+        text-align: center;
+    }
+    .li_pic{
+        position: relative;
+    }
+    .mask{
+            position: absolute;
+            /*拉伸*/
+            left: 0;
+            top:0;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.4);
+            color: white;
+            display: none;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        /*居中效果*/
+    .center{
+            /*position: absolute;*/
+            width: 100%;
+            /*高度不确定*/
+/*          height: 46px;
+            left: 0;
+            top:0;
+            bottom:0;
+            right: 0;
+            margin: auto;*/
+
+            vertical-align: middle;
+            display: inline-block;
+        }
+    .center h2{
+            font-size: 1.8rem;
+ /*           padding-bottom: 10px;*/
+        }
+    .b_middle ul .center>p{
+        color: white;
+    }
+    #footer{
+            background: #e0e0e0;
+            position: relative;
+            width: 100%;
+            margin-top:40px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-shadow: 1px 1px 1px white;
+            color: #666666;
+            overflow: hidden;
+    }
+    #footer .footer_left,#footer .footer_right{
+        width: 49%;
+        display: inline-block;
+    }
+    #footer .footer_left{
+        vertical-align: top;
+        float: left;
+    }
+    #footer .footer_left .link{
+        float: right;
+        height: 50px;
+    }
+    #footer .footer_left .link a{
+        width: 30px;
+        float: left;
+        margin-left: 5px;
+    }
+    #footer .footer_left .link a img{
+        width: 100%;
+    }
+    #footer .footer_right {
+        border-left:1px solid #bcbcbc;
+        float: right;
+    }
+    #footer .footer_right .contact{
+        margin-left:3%;
+        font-size: 0.75em;
+
+    }
+    #footer .footer_right .contact_logo{
+        width: 143px;
+        margin-bottom: 10px;
+    }
+     #footer .footer_right .contact_logo img{
+        width: 100%;
+     }
+     #footer .footer_right  p{
+        margin-bottom: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="head">
+        <img src="img/title2.png" class="logo">
+        <div class="bar">
+            <a href="#" class="a1">HOME</a>
+            <a href="#">WORK</a>
+            <a href="#">CONTACT</a>
+            <a href="#">JOIN US</a>
+        </div>
+        <!-- head -end -->
+    </div>
+    <div id="body">
+        <div class="background">
+            <div class="b_top">
+                <div class="b_pic_top">
+                <img src="img/titl.jpg" class="b_pic">
+                <div class="b_left">
+                    <a href="###"><img src="img/left.png"></a>
+                </div>
+                <div class="b_right">
+                    <a href="###"><img src="img/right.png"></a>
+                </div>
+                <div class="b_bottom">
+                    <p>动画者短片《旅行者大意了》</p>
+                </div>
+                </div>
+                <div class="b_span">
+                    <span class="span span1"></span>
+                    <span class="span"></span>
+                    <span class="span"></span>
+                    <span class="span"></span>
+                </div>
+                <p class="swiper_p">
+                    Infini Studio (映纷创意)是一家创意机构，专注于品质型动画影像的创意与设计。我们使用设计、绘画、动画、特效及多种创新形式，以动态视觉语言对品牌与内容进行创意呈现。并由动画导演、设计师、插画师、三维艺术家等共同协作完成。服务的领域包括广告、创意H5、新媒体等。
+                </p>
+                <div class="logo2">
+                    <span><img src="img/1.jpg" alt=""></span>
+                    <span><img src="img/2.jpg" alt=""></span>
+                    <span><img src="img/14.jpg" alt=""></span>
+                    <span><img src="img/3.jpg" alt=""></span>
+                    <span><img src="img/4.jpg" alt=""></span>
+                    <span><img src="img/5.jpg" alt=""></span>
+                    <span><img src="img/6.jpg" alt=""></span>
+                    <span><img src="img/7.jpg" alt=""></span>
+                    <span><img src="img/12.jpg" alt=""></span>
+                    <span><img src="img/13.jpg" alt=""></span>
+                    <span><img src="img/8.jpg" alt=""></span>
+                    <span><img src="img/9.jpg" alt=""></span>
+                    <span><img src="img/10.jpg" alt=""></span>
+                    <span><img src="img/11.jpg" alt=""></span>
+                </div>
+            </div>
+            <!-- b_top -end -->
+            <div class="b_middle">
+                <ul>
+                    <li class="li">
+                        <div class="li_pic">
+                            <a href="###">
+                            <img src="img/m1.jpg">
+                             <!-- 蒙版 -->
+                            <div class="mask baseline"><div class="center"><h2>小米MAX2</h2>
+                            <p>小米max2创意海报</p>
+                            </div>
+                            </div>
+                             </a>
+                        </div>
+                         <p>小米max2创意海报</p>
+                    </li>
+                    <li class="li li_m">
+                        <div class="li_pic">
+                        <a href="###">
+                            <img src="img/m2.jpg">
+                            <div class="mask baseline"><div class="center"><h2>阿里巴巴</h2>
+                            <p>聚星台会员通</p>
+                            </div>
+                            </div>
+                        </a>
+                         </div>
+                        <p>聚星台会员通</p>
+                       
+                    </li>
+                    <li class="li">
+                        <div class="li_pic">
+                        <a href="###">
+                            <img src="img/m3.jpg">
+                            <div class="mask baseline"><div class="center"><h2>OPPO</h2>
+                            <p>R9s清新绿实验室大揭秘H5</p>
+                            </div>
+                            </div>    
+                        </a>
+                         </div>
+                        <p>清新绿实验室大揭秘H5</p>
+                        
+                    </li>
+                    <li class="li">
+                        <div class="li_pic">
+                        <a href="###">
+                            <img src="img/m4.jpg">
+                            <div class="mask baseline"><div class="center"><h2>今日头条</h2>
+                            <p>今日头条功能片第二弹</p>
+                            </div>
+                            </div>
+                            
+                        </a>
+                         </div>
+                        <p>今日头条功能片第二弹</p>
+                        
+                    </li>
+                    <li class="li li_m">
+                        <div class="li_pic">
+                        <a href="###">
+                            <img src="img/m5.jpg">
+                            <div class="mask baseline"><div class="center"><h2>百度</h2>
+                            <p>百度情人节首页Doodle</p>
+                            </div>
+                            </div>
+                            
+                        </a>
+                         </div>
+                        <p>百度情人节首页Doodle</p>
+                       
+                    </li>
+                    <li class="li">
+                        <div class="li_pic">
+                        <a href="###">
+                            <img src="img/m6.jpg">
+                            <div class="mask baseline"><div class="center"><h2>腾讯</h2>
+                            <p>微众银行</p>
+                            </div>
+                            </div>
+                            
+                        </a>
+                         </div>
+                        <p>微众银行品牌宣传片</p>
+                       
+                    </li>
+                    <li class="li">
+                        <div class="li_pic">
+                        <a href="###">
+                            <img src="img/m7.jpg">
+                            <div class="mask baseline"><div class="center"><h2>网易新闻</h2>
+                            <p>动画者短片《旅行者大意了》</p>
+                            </div>
+                            </div>
+                            
+                        </a>
+                         </div>
+                        <P>动画者短片《旅行者大意了》</P>
+                        
+                    </li>
+                    <li class="li li_m">
+                        <div class="li_pic">
+                        <a href="###">
+                            <img src="img/m8.jpg">
+                            <div class="mask baseline"><div class="center"><h2>扇贝</h2>
+                            <p>扇贝雅思课程</p>
+                            </div>
+                            </div>
+                           
+                        </a>
+                         </div>
+                         <p>扇贝雅思课程</p>
+                        
+                    </li>
+                    <li class="li">
+                        <div class="li_pic">
+                        <a href="###">
+                            <img src="img/m9.jpg">
+                            <div class="mask baseline"><div class="center"><h2>链家</h2>
+                            <p>链家大数据</p>
+                            </div>
+                            </div>
+                        </a>
+                         </div>
+                         <p>链家大数据</p>
+                        
+                    </li>
+                </ul>
+            </div>
+            <!-- b_middle -end -->
+        </div>
+    </div>
+    <!-- body -end -->
+    <div id="footer">
+        <div class="footer_left">
+            <div class="link">
+            <a href="###"><img src="img/contact1.jpg"></a>
+            <a href="###"><img src="img/contact2.jpg"></a>
+            <a href="###"><img src="img/contact3.jpg"></a>
+            </div>
+        </div>
+        <div class="footer_right">
+            <div class="contact">
+            <div class="contact_logo">
+                <img src="img/footer_logo.jpg">
+            </div>
+            <p>Infini Studio | 映纷创意</p>
+            <p>北京市朝阳区常营未来时大厦706</p>
+            <p>TEL : 010-85394331</p>
+            <p>QQ : 7585917</p>
+            <p>Email : infinistudio@foxmail.com</p>
+            <p>weibo : @InfiniStudio</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

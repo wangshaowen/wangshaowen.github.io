@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>微信飞机</title>
+
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+	</head>
+
+	<body>
+		<!--引入音频文件-->
+		<div id="audioList">
+			<audio src="audio/bullet.mp3" id="bulletsound"></audio>
+			<audio src="audio/enemy1_down.mp3" id="enemy1sound"></audio>
+			<audio src="audio/enemy2_down.mp3" id="enemy2sound"></audio>
+			<audio src="audio/enemy3_down.mp3" id="enemy3sound"></audio>
+			<audio src="audio/game_music.mp3" id="gamemusic" loop="loop"></audio>
+			<audio src="audio/game_over.mp3" id="gameoversound"></audio>
+		</div>
+
+		<div id="wrap">
+			<!--分数栏-->
+			<div id="sorce">
+				分数:
+				<span id="sorces">0</span>
+			</div>
+			<canvas id="myCanvas" width="" height=""></canvas>
+
+			<!--gameover界面-->
+			<ul id="lose">
+				<li>游戏结束</li>
+				<li>您的分数为:<span id="sorceEnd">0</span></li>
+				<li>
+					<a href="###" id="again">满血复活</a>
+				</li>
+			</ul>
+
+		</div>
+
+		<script src="js/jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			
+			$(function($) {
+				//获取元素
+				var bulletSound = document.getElementById("bulletsound");
+				var enemy1Sound = document.getElementById("enemy1sound");
+				var enemy2Sound = document.getElementById("enemy2sound");
+				var enemy3Sound = document.getElementById("enemy3sound");
+				var gameoverSound = document.getElementById("gameoversound");
+				var gameMusic = document.getElementById("gamemusic");
+				//分数
+				var scores = $("#sorces");
+				//游戏结束显示分数
+				var scoreEnd = $("#sorceEnd");
+				var again = $("#again");
+				//获取canvas
+				var canvas = $("#myCanvas");
+				var ctx = canvas[0].getContext("2d");
+				//设置画布的宽高:注意：只能用原生方法设置宽高属性，不能设置css，不然图片分辨率会有问题
+				canvas[0].height = $(window).height();
+				canvas[0].width = $(window).width();
+				//开始背景音乐
+				gameMusic.play();
+
+				canvas.on("touchstart", function(ev) {
+					//console.log(ev);
+					ev.preventDefault();
+				});
+
+				var gameObj = {
+					herofly: null, //英雄
+					backgroundObj: null, //背景对象
+					animationFrame: null, //动画的id
+					score: 0, //得分
+
+				};
+
+				//*****************背景*****************************
+				function Background() {
+					var bgImg = new Image();
+					bgImg.src = "img/background.png";
+
+					this.bgImg = bgImg;
+					// body...
+					this.x = 0;
+					this.y = 0;
+					this.w = $(window).width();
+					this.h = $(window).height();
+					this.speed = 2;
+				}
+				Background.prototype.draw = function() {
+					//上面
+					ctx.drawImage(this.bgImg, this.x, this.y - this.h, this.w, this.h);
+
+					// 下面
+					ctx.drawImage(this.bgImg, this.x, this.y, this.w, this.h);
+				};
+				Background.prototype.move = function() {
+					this.y += this.speed;
+
+					if(this.y >= $(window).height()) {
+						this.y = 0;
+					};
+
+				}
+
+				//*****************英雄飞机***************************
+				function Herofly() {
+					var heroImg = new Image();
+					heroImg.src = "img/herofly.png";
+					this.heroImg = heroImg;
+					//坐标
+					this.x = $(window).width() / 2 - 33;
+					this.y = $(window).height() - 82 - 100;
+					//大小
+					this.w = 66;
+					this.h = 82;
+					//裁切的位置：X
+					this.clipPosition = 0;
+
+					//5张爆炸图片
+					this.bzFrame = 5;
+
+				}
+				//绘制
+				Herofly.prototype.draw = function() {
+					ctx.drawImage(this.heroImg, this.clipPosition * this.w, 0, this.w, this.h, this.x, this.y, this.w, this.h);
+
+				};
+
+				//爆炸
+				Herofly.prototype.baoZha = function() {
+
+					this.clipPosition++;
+					if(this.clipPosition === this.bzFrame - 1) {
+						//结束了。。。。
+						gameOver();
+
+					}
+
+				};
+				//***********拖拽*******************************
+
+				canvas.on("mousedown touchstart", function(ev) {
+					//console.log(ev);
+
+					var offX = 0;
+					var offY = 0;
+
+					//手机偏移
+					if(ev.type === "touchstart") {
+						offX = ev.touches[0].clientX;
+						offY = ev.touches[0].clientY;
+
+					} else if(ev.type === "mousedown") {
+						offX = ev.offsetX;
+						offY = ev.clientY - $(this).offset().top;
+
+					}
+
+					//水平
+					var resX = offX > gameObj.herofly.x && offX < (gameObj.herofly.x + gameObj.herofly.w);
+					//垂直
+					var resY = offY > gameObj.herofly.y && offY < (gameObj.herofly.y + gameObj.herofly.h);
+
+					if(resX && resY) {
+						//alert("点到了");
+
+						//鼠标相对飞机的偏移
+						var offFlyX = offX - gameObj.herofly.x;
+						var offFlyY = offY - gameObj.herofly.y;
+
+						//绑定移动
+						canvas.on("mousemove touchmove", function(ev) {
+							//console.log(ev.offsetX, ev.offsetY);
+							var x = 0;
+							var y = 0;
+							if(ev.type === "mousemove") {
+								x = ev.offsetX - offFlyX;
+								y = ev.offsetY - offFlyY;
+
+							} else if(ev.type === "touchmove") {
+								x = ev.touches[0].clientX - offFlyX;
+								y = ev.touches[0].clientY - offFlyY;
+
+							}
+							gameObj.herofly.x = x;
+							gameObj.herofly.y = y;
+							//清除画布
+							//ctx.clearRect(0, 0, canvas.width(), canvas.height());
+
+							//重新绘制
+							//gameObj.herofly.draw();
+
+						});
+
+						//抬起
+						canvas.on("mouseup touchend", function(ev) {
+							canvas.off("mousemove touchmove").off("mouseup touchend");
+						});
+
+					};
+
+				});
+
+				//*********************子弹绘制*********************************
+
+				//单排: 6*14
+				var bullet = new Image();
+				bullet.src = "img/bullet1.png";
+				//双排  48*14
+				var bulletDouble = new Image();
+				bulletDouble.src = "img/bullet2.png";
+
+				//hurt:子弹攻击力
+				function Bullet(img, x, y, w, h, hurt = 1) {
+
+					this.img = img;
+					this.x = x;
+					this.y = y;
+					this.w = w;
+					this.h = h;
+					//攻击力
+					this.hurt = hurt;
+
+				}
+				Bullet.prototype.draw = function() {
+					ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+
+				};
+				Bullet.prototype.move = function() {
+
+					this.y -= 2;
+
+				};
+				//死亡
+				Bullet.prototype.death = function() {
+					//数组中删除
+					var index = gameObj.bullets.indexOf(this);
+					//
+					gameObj.bullets.splice(index, 1);
+
+				};
+
+				//创建子弹的方法
+
+				gameObj.bullets = []; //存放子弹对象
+
+				//控制子弹创建的频率
+				gameObj.bulletFrame = 0;
+
+				gameObj.initBullets = function(img, x, y, w, h, hz, hurt = 1) {
+
+					gameObj.bulletFrame++;
+
+					if(gameObj.bulletFrame % hz === 0) {
+						var bullet = new Bullet(img, x, y, w, h, hurt);
+						//存储
+						gameObj.bullets.push(bullet);
+						//防止数字过大
+						gameObj.bulletFrame = 0;
+
+					}
+
+				};
+
+				//绘制+移动方法
+				gameObj.drawMoveBullets = function() {
+
+					gameObj.bullets.forEach(function(bullet) {
+						//绘制
+						bullet.draw();
+						//移动
+						bullet.move();
+
+						if(bullet.y <= 0) {
+							//死亡
+							bullet.death();
+						}
+
+					});
+
+					//document.title = gameObj.bullets.length;
+
+				};
+
+				//**********************绘制敌人飞机********************
+
+				//38*34
+				var enemy1 = new Image();
+				enemy1.src = "img/enemy1.png";
+
+				//46*64
+				var enemy2 = new Image();
+				enemy2.src = "img/enemy3.png";
+
+				//110*164
+				var enemy3 = new Image();
+				enemy3.src = "img/enemy2.png";
+
+				//bzFrame:爆炸的时候切换图片数
+				function Enemy(img, x, y, w, h, speed, blood, score, bzFrame, type) {
+
+					this.img = img;
+					this.x = x;
+					this.y = y;
+					this.w = w;
+					this.h = h;
+					//下落速度
+					this.speed = speed;
+					//血量
+					this.blood = blood;
+					//分值
+					this.score = score;
+					//爆炸图张数
+					this.bzFrame = bzFrame;
+					//小  中  大
+					this.type = type;
+
+					//裁切的位置：默认0
+					this.clipPosition = 0;
+
+				}
+				Enemy.prototype.draw = function() {
+					ctx.drawImage(this.img, this.clipPosition * this.w, 0, this.w, this.h, this.x, this.y, this.w, this.h);
+				}
+				Enemy.prototype.move = function() {
+
+					if(this.blood > 0) {
+						this.y += this.speed;
+					} else {
+						this.baoZha();
+						playDeath(this.type);
+					}
+
+				};
+
+				//爆炸->死亡
+				Enemy.prototype.baoZha = function() {
+
+					this.clipPosition++;
+					//爆炸执行完了。。
+					if(this.clipPosition === this.bzFrame - 1) {
+						this.death();
+						//加分
+						addScore(this.score);
+					}
+
+				};
+
+				//死亡
+				Enemy.prototype.death = function() {
+					//数组中删除
+					var index = gameObj.enemyArr.indexOf(this);
+					//
+					gameObj.enemyArr.splice(index, 1);
+
+				};
+
+				//数组:保持屏幕是所有敌机
+				gameObj.enemyArr = [];
+				gameObj.enemyFrame = 0;
+
+				gameObj.enemyHZ = 20;
+
+				//初始化敌人飞机方法
+				gameObj.initEnemies = function() {
+					gameObj.enemyFrame++;
+
+					if(gameObj.enemyFrame % gameObj.enemyHZ === 0) {
+						gameObj.enemyFrame = 0;
+
+						//0~50：小飞机    50~80：中   80~100:大
+						var enemyType = rand(0, 100);
+						//随机位置
+						var enemy1X = rand(0, $(window).width() - 38);
+						var enemy2X = rand(0, $(window).width() - 46);
+						var enemy3X = rand(0, $(window).width() - 110);
+						//y
+						var y1 = -34;
+						var y2 = -64;
+						var y3 = -164;
+						//随机速度
+						var speed = rand(2, 5);
+
+						var enemy = null;
+
+						//img,x,y,w,h,speed,blood,score,bzFrame，type
+						if(enemyType <= 50) {
+							enemy = new Enemy(enemy1, enemy1X, y1, 38, 34, speed, 2, 100, 5, "小")
+						} else if(enemyType < 80) {
+
+							enemy = new Enemy(enemy2, enemy2X, y2, 46, 64, speed, 4, 400, 6, "中")
+						} else {
+							enemy = new Enemy(enemy3, enemy3X, y3, 110, 164, speed, 8, 800, 10, "大")
+						}
+						//存到数组
+						gameObj.enemyArr.push(enemy);
+
+					}
+
+				};
+
+				//绘制+移动
+				gameObj.drawMoveEnemy = function() {
+
+					gameObj.enemyArr.forEach(function(enemy) {
+						enemy.draw();
+						enemy.move();
+
+						//出去屏幕后删除！下次就不在绘制
+						if(enemy.y > $(window).height()) {
+							enemy.death();
+						}
+
+					});
+					document.title = gameObj.enemyArr.length;
+
+				};
+
+				//*********************碰撞检测函数***********************
+
+				gameObj.crashTest = function() {
+					//所有敌机
+					gameObj.enemyArr.forEach(function(enemy) {
+
+						//遍历子弹
+						gameObj.bullets.forEach(function(bullet) {
+
+							var res = crash(enemy, bullet);
+							if(res) { //碰到了
+								//子弹直接死亡
+								bullet.death();
+								//敌人飞机
+								enemy.blood -= bullet.hurt;
+							}
+						});
+
+						//和英雄碰撞检测
+						if(crash(gameObj.herofly, enemy)) {
+							//英雄爆炸
+							gameObj.herofly.baoZha();
+						}
+
+					});
+
+				};
+
+				//循环调用
+				function animation() {
+
+					gameObj.animationFrame = window.requestAnimationFrame(animation);
+
+					ctx.clearRect(0, 0, $(window).width(), $(window).height());
+
+					//背景绘制+移动
+					gameObj.backgroundObj.draw();
+					gameObj.backgroundObj.move();
+
+					//绘制英雄
+					gameObj.herofly.draw();
+
+					var x = gameObj.herofly.x + gameObj.herofly.w / 2 - 3;
+					var y = gameObj.herofly.y - 14;
+					//子弹不停创建绘制： 最后是创建子弹的频率10和攻击力1
+					gameObj.initBullets(bullet, x, y, 6, 14, 10, 2);
+					//绘制+移动
+					gameObj.drawMoveBullets();
+
+					//敌人飞机
+					gameObj.initEnemies();
+					//绘制移动
+					gameObj.drawMoveEnemy();
+
+					//检测碰撞
+					gameObj.crashTest();
+
+				}
+
+				//入口函数
+				function main() {
+					//背景对象
+					gameObj.backgroundObj = new Background();
+					//英雄飞机
+					gameObj.herofly = new Herofly();
+
+					//开始动画
+					animation();
+
+				}
+				main();
+
+				//游戏结束
+				function gameOver() {
+					//结束动画。。。
+					window.cancelAnimationFrame(gameObj.animationFrame);
+
+					//显示结果。。。。
+					scoreEnd.html(gameObj.score);
+					$("#lose").css("display", "block");
+
+					//背景音乐暂停
+					gameMusic.pause();
+					//结束播放
+					gameoverSound.play();
+
+				}
+				//加分
+				function addScore(number) {
+					gameObj.score += number;
+
+					scores.html(gameObj.score);
+				}
+				//播放飞机死亡音乐
+				function playDeath(type) {
+					switch(type) {
+						case "小":
+							enemy1Sound.play();
+							break;
+						case "中":
+							enemy2Sound.play();
+							break;
+						case "大":
+							enemy3Sound.play();
+							break;
+						default:
+							break;
+					}
+				}
+
+				//	创建随机函数
+				function rand(min, max) {
+					return parseInt(Math.random() * (max - min + 1) + min);
+				}
+				//	创建碰撞函数
+				function crash(obj1, obj2) {
+					//上下作于
+					var l1 = obj1.x;
+					var r1 = l1 + obj1.w;
+					var t1 = obj1.y;
+					var b1 = t1 + obj1.h;
+
+					var l2 = obj2.x;
+					var r2 = l2 + obj2.w;
+					var t2 = obj2.y;
+					var b2 = t2 + obj2.h;
+					if(l1 > r2 || r1 < l2 || t1 > b2 || b1 < t2) {
+						return false;
+					} else {
+						return true;
+					}
+				}
+
+				//获取JQ匿名函数
+				var JQReady = arguments.callee;
+
+				//再来一次。。。js重新运行下
+				$("#again").on("touchstart click", function() {
+					//alert(123);
+					$("#lose").css("display", "none");
+					//刷新
+					//main();
+
+					$("#sorce").html("0");
+
+					//console.log(JQReady);
+					canvas.off("mousedown touchstart");
+					$("#again").off("touchstart click");
+					
+					//var $ = ;
+					JQReady($);
+
+				});
+				//console.log($("#again"))
+
+			});
+			//JQ-end
+		</script>
+	</body>
+
+</html>
